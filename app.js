@@ -2,8 +2,10 @@ const express = require('express')
 const app = express()
 const port = 3000
 
+app.use(express.static('public'))
+
 app.get('/', (req, res) => {
-  res.redirect('/movies') //重新導向
+  res.redirect('/movies') //網站的首頁會直接導向電影清單。
 })
 
 app.get('/movies', (req, res) => {
