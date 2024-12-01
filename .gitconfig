@@ -1,0 +1,10 @@
+[user]
+	name = Cindy-Hseih55
+	email = orange0505365@gmail.com
+[difftool "sourcetree"]
+	cmd = "'' "
+[mergetool "sourcetree"]
+	cmd = "'' "
+	trustExitCode = true
+[safe]
+	directory = C:/Users/orang/my-movie-list

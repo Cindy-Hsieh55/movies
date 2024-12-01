@@ -15,13 +15,22 @@ app.get('/', (req, res) => {
 })
 
 app.get('/movies', (req, res) => {
-  res.render('index', { movies, BASE_IMG_URL}) //放要讀取的檔案名稱,變數
+  const keyword = req.query.search?.trim() //req.query + 定義在index.hbs上的名字
+  const matchedMovies = keyword ? movies.filter((mv) =>  //keyword存在才放入matchedMovies
+    Object.values(mv).some((property) => {  //拿到所有movies的值
+      if(typeof property === 'string') {
+        return property.toLowerCase().includes(keyword.toLowerCase())
+      }
+      return false
+    }) 
+  ) : movies //不存在keyword顯示原本movies
+  res.render('index', { movies: matchedMovies, BASE_IMG_URL, keyword}) //放要讀取的檔案名稱,變數
 })
 
-app.get('/movie/:id', (req, res) => {
+app.get('/movies/:id', (req, res) => {
   const id = req.params.id //拿到的id是字串
   const movie = movies.find((mv) => mv.id.toString() === id)
-  res.render(`detail`, { movie, BASE_IMG_URL})
+  res.render('detail', { movie, BASE_IMG_URL})
 })
 
 app.listen(port, () => {
